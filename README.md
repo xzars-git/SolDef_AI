@@ -111,6 +111,53 @@ Model saved: qc_inspector_model.h5
 
 ---
 
+## 🎯 Actual Training Results
+
+Model ini telah berhasil ditraining dengan hasil yang sangat memuaskan! Berikut dokumentasi hasil training:
+
+### Training Setup & Progress
+<div align="center">
+<img src="results/result_1.jpg" width="45%" alt="Training Setup">
+<img src="results/result_2.jpg" width="45%" alt="Training Progress">
+</div>
+
+### Training Metrics & Results
+<div align="center">
+<img src="results/result_3.jpg" width="45%" alt="Training Metrics">
+<img src="results/result_4.jpg" width="45%" alt="Training Results">
+</div>
+
+### Final Accuracy & Model Evaluation
+<div align="center">
+<img src="results/result_5.jpg" width="45%" alt="Final Accuracy">
+<img src="results/result_6.jpg" width="45%" alt="Model Evaluation">
+</div>
+
+### 🖥️ Demo Application (Casting Defect Detection UI)
+
+Aplikasi GUI telah berhasil dibuat untuk inspeksi kualitas produk casting:
+
+<div align="center">
+<img src="results/result_7_ui.jpg" width="45%" alt="Application UI">
+<img src="results/result_8_ui.jpg" width="45%" alt="Detection Result - OK with 99.73% Confidence">
+</div>
+
+**Fitur Aplikasi:**
+- 📁 Upload image untuk analisis
+- 🔍 Automatic defect detection
+- 📊 Detailed inspection report dengan confidence score
+- ✅ Result: **OK** dengan confidence **99.73%**
+- 📋 Product information (Type: Submersible pump impeller)
+- 🤖 Model: MobileNetV2 (Transfer Learning)
+
+**Hasil Deteksi:**
+- Status: **PASS - Quality OK ✅**
+- Confidence: **99.73%**
+- Prediction Score: **0.9973**
+- Threshold: **0.5**
+
+---
+
 ## 📁 Output Files
 
 Setelah training selesai:

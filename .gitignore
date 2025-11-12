@@ -47,6 +47,12 @@ Labeled/
 Dataset/
 dataset/
 
+# Results folder - keep structure but exclude large images (optional)
+# Uncomment if you want to exclude result images from git:
+# results/*.jpg
+# results/*.jpeg
+# results/*.png
+
 # Demo App Captures
 Demo App/captures/
 
