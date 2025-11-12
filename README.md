@@ -150,6 +150,35 @@ print(f"Impeller Status: {result} (Confidence: {confidence:.2f}%)")
 
 ---
 
+## 🎯 Demo Applications
+
+**2 versi demo app Python dengan GUI sudah tersedia di folder `Demo App/`:**
+
+### 1️⃣ Upload Image Version (`app_upload.py`)
+- 📁 Upload gambar impeller dan analisis
+- 📊 Detailed inspection report dengan confidence score
+- 🎨 Beautiful GUI dengan Tkinter
+- ✅ Best for: Batch processing, archive images
+
+### 2️⃣ Real-time Camera Version (`app_realtime.py`)
+- 📹 Live detection via webcam/camera
+- 🎥 Real-time overlay dan FPS counter
+- 📸 Capture frame dengan hasil prediksi
+- ✅ Best for: Live inspection, QC production line
+
+**Quick Start:**
+```powershell
+cd "Demo App"
+# Double-click: DEMO_LAUNCHER.bat
+# Atau manual:
+python app_upload.py      # Upload version
+python app_realtime.py    # Real-time version
+```
+
+**Dokumentasi lengkap:** [Demo App/README.md](Demo%20App/README.md)
+
+---
+
 ## 📚 Documentation
 
 - 📖 [QUICKSTART.md](QUICKSTART.md) - Panduan cepat untuk pemula

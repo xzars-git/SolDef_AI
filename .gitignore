@@ -45,6 +45,10 @@ venv.bak/
 # Dataset & Large Files (Labeled folder dengan gambar & JSON)
 Labeled/
 Dataset/
+dataset/
+
+# Demo App Captures
+Demo App/captures/
 
 # Model Files (opsional - uncomment jika ingin commit model)
 *.hdf5
