@@ -1,133 +1,116 @@
-# PCB Defect Detection - Quick Start Guide
+# 🚀 Quick Start Guide
 
-## 🎯 Pilih Metode Training Anda
+Panduan singkat untuk memulai training PCB defect detection model dengan cepat.
 
-### 1️⃣ VS Code (Untuk Developer - Recommended)
+---
+
+## ⚡ Quick Start (3 Langkah)
+
+```bash
+# 1. Setup environment
+conda create -n pcb python=3.9 -y
+conda activate pcb
+pip install -r requirements.txt
+
+# 2. Verifikasi GPU
+python -c "import tensorflow as tf; print('GPU:', tf.config.list_physical_devices('GPU'))"
+
+# 3. Jalankan training
+python train.py
+```
+
+**Hasil:** Model `qc_inspector_model.h5` siap digunakan! 🎉
+
+---
+
+## 🎯 3 Metode Training
+
+### 1️⃣ VS Code (Recommended)
 
 **Kelebihan:** Debugging, Git integration, code completion
-**Waktu Setup:** 10 menit
 **Waktu Training:** 20-25 menit (200 epochs)
 
 ```bash
 # Terminal di VS Code
 conda activate pcb
 python train.py
+# atau Ctrl+F5
 ```
-
-**Tips:**
-- Set breakpoint untuk debugging
-- Gunakan Ctrl+C untuk stop training
-- Lihat output real-time di terminal
 
 ---
 
-### 2️⃣ Jupyter Notebook (Untuk Eksperimen)
+### 2️⃣ Jupyter Notebook
 
-**Kelebihan:** Visualisasi interaktif, run per cell, dokumentasi inline
-**Waktu Setup:** 5 menit
+**Kelebihan:** Visualisasi interaktif, run per cell
 **Waktu Training:** 20-25 menit (200 epochs)
 
 ```bash
-# Terminal
 conda activate pcb
 jupyter notebook
-# Browser akan terbuka → klik train.ipynb
+# Buka train.ipynb → Run all
 ```
-
-**Tips:**
-- Jalankan cell satu per satu dengan Shift+Enter
-- Visualisasi langsung muncul
-- Bisa edit parameter tanpa restart
 
 ---
 
-### 3️⃣ Google Colab (Untuk Cloud/Gratis GPU)
+### 3️⃣ Google Colab (Cloud GPU)
 
-**Kelebihan:** Gratis T4 GPU, tidak perlu install apapun
-**Waktu Setup:** 2 menit
+**Kelebihan:** Gratis T4 GPU, tidak perlu install
 **Waktu Training:** 30-40 menit (200 epochs)
 
 ```
 1. Buka https://colab.research.google.com
 2. Upload train.ipynb
-3. Runtime → Change runtime type → GPU (T4)
-4. Upload dataset (atau mount Google Drive)
+3. Runtime → GPU (T4)
+4. Upload dataset atau mount Drive
 5. Run all cells
 ```
 
-**Tips:**
-- Keep tab terbuka (jangan close browser)
-- Download model setelah selesai
-- Session timeout 12 jam
-
 ---
 
-## 📊 Expected Results
+## ⚡ Expected Results
 
-### Training Progress (Example)
+**Training Time (RTX 3080 Ti):**
+- 50 epochs: ~5-7 menit
+- 100 epochs: ~10-15 menit  
+- 200 epochs: ~20-25 menit
 
+**Target Accuracy:**
+- Training: ≥ 90% ✅
+- Validation: ≥ 90% ✅
+
+**Output Files:**
 ```
-Epoch 1/200
-343/343 [==============================] - 8s 21ms/step
-loss: 0.4521 - accuracy: 0.7821 - val_loss: 0.3912 - val_accuracy: 0.8235
-
-Epoch 50/200
-343/343 [==============================] - 6s 18ms/step
-loss: 0.1234 - accuracy: 0.9456 - val_loss: 0.1567 - val_accuracy: 0.9176
-
-Epoch 100/200
-343/343 [==============================] - 6s 18ms/step
-loss: 0.0821 - accuracy: 0.9678 - val_loss: 0.1245 - val_accuracy: 0.9294
-
-Epoch 150/200
-343/343 [==============================] - 6s 18ms/step
-loss: 0.0567 - accuracy: 0.9789 - val_loss: 0.1123 - val_accuracy: 0.9412
-
-Early Stopping: Restoring best weights from epoch 145
-```
-
-### Final Results (Good Model)
-
-```
-✅ TRAINING COMPLETED!
-
-Final Results:
-Training Accuracy: 0.9678
-Validation Accuracy: 0.9412
-Gap: 2.66% → Excellent generalization!
-
-Files saved:
-  - qc_inspector_model.h5 (9.2 MB)
-  - best_model.h5 (9.2 MB)
-  - training_history.json (15 KB)
+✅ qc_inspector_model.h5        # Model final
+✅ best_model.h5                # Best checkpoint
+✅ training_history.json        # Training metrics
+✅ logs/                        # TensorBoard logs
 ```
 
 ---
 
-## 🔧 Common Issues & Quick Fix
+## 🔧 Common Issues
 
-| Problem | Quick Fix |
-|---------|-----------|
-| GPU not detected | Restart PC, check CUDA 11.2 installed |
-| Training hang | Already fixed with `workers=0` |
-| Out of Memory | Change `BATCH_SIZE = 8` in train.py |
-| Too slow | Check GPU is being used, not CPU |
-| Low accuracy | Train longer (300 epochs) or add more data |
-
----
-
-## 📞 Need Help?
-
-1. **Check README.md** - Comprehensive troubleshooting guide
-2. **Check logs/** - TensorBoard untuk visualisasi
-3. **Check training_history.json** - Metrics per epoch
+| Problem | Quick Fix | Detail |
+|---------|-----------|--------|
+| GPU not detected | Install CUDA 11.2 + cuDNN 8.1 | [WINDOWS_SETUP.md](WINDOWS_SETUP.md) |
+| Import Error | `conda activate pcb` | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) |
+| OOM Error | `BATCH_SIZE = 8` | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) |
+| Training hang | Already fixed (workers=0) | - |
+| Low accuracy | Tambah epochs atau data | [CONFIGURATION.md](CONFIGURATION.md) |
 
 ---
 
-## ✅ Next Steps After Training
+## � Dokumentasi Lengkap
 
-1. ✅ **Test model** → Load model & predict test images
-2. ✅ **Convert to TFLite** → For Flutter mobile app
-3. ✅ **Deploy** → Integrate with your application
+| Dokumen | Konten |
+|---------|--------|
+| **[README.md](README.md)** | Quick start & cara running |
+| **[WINDOWS_SETUP.md](WINDOWS_SETUP.md)** | Setup CUDA & cuDNN |
+| **[DATASET.md](DATASET.md)** | Info dataset & download |
+| **[CONFIGURATION.md](CONFIGURATION.md)** | Tweaking parameters |
+| **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** | Troubleshooting & FAQ |
+| **[DEPLOYMENT.md](DEPLOYMENT.md)** | Deploy ke production |
 
-**See README.md section "Next Steps & Deployment" for complete guide!**
+---
+
+**Ready to start?** Run `python train.py` dan monitor progress! 🚀
