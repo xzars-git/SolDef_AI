@@ -1,4 +1,4 @@
-# 🔍 Casting Product Defect Detection with AI
+# 🔍 Cast Iron Submersible Pump Impeller Quality Control
 
 Sistem deteksi cacat produksi casting (submersible pump impeller) menggunakan TensorFlow dan MobileNetV2 untuk quality control otomatis.
 
