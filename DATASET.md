@@ -1,6 +1,62 @@
 # 📊 Dataset Information
 
-Informasi lengkap tentang dataset Casting Product Image Data yang digunakan untuk training.
+Informasi lengkap tentang **Real-life Industrial Dataset of Casting Product** yang digunakan untuk training model deteksi cacat produksi casting.
+
+---
+
+## 📖 About the Dataset
+
+### Context
+Dataset ini berisi gambar produk manuf### Opsi 1: Gunakan Full Dataset dari Kaggle
+```
+Download full dataset (7,348 images with augmentation):
+1. Kunjungi: https://www.kaggle.com/datasets/ravirajsinh45/real-life-industrial-dataset-of-casting-product
+2. Download "casting_data.zip" (300x300 dataset dengan augmentation)
+3. Extract dan gunakan train folder
+4. Training accuracy akan lebih tinggi dengan data lebih banyak
+```
+
+**Opsi 2: Foto Lebih Banyak Produk Impeller**
+```
+1. Ambil foto impeller casting dengan top view yang konsisten
+2. Pastikan lighting stabil (gunakan special arrangement)
+3. Simpan ke folder dataset/def_front/ atau dataset/ok_front/
+4. Format: JPEG, minimal 224x224 pixels, grayscale atau RGB
+5. Label dengan jelas (defective vs OK)
+```
+
+**Opsi 3: Download Dataset Casting Tambahan**
+- Kaggle: Casting defect datasets (search "casting defect")
+- Roboflow: Manufacturing defect datasets
+- Public datasets: Metal casting quality inspection
+
+**Opsi 4: Synthetic Data (Advanced)**
+- Gunakan Blender/3D rendering untuk impeller models
+- Image compositing dengan defect simulation
+- GAN-generated defect imagesbmersible pump impeller).
+
+**Casting** adalah proses manufaktur di mana material cair dituangkan ke dalam cetakan yang berisi rongga dengan bentuk yang diinginkan, kemudian dibiarkan mengeras.
+
+### Problem Statement
+**Casting defects** adalah ketidakteraturan yang tidak diinginkan dalam proses metal casting. 
+
+**Jenis-jenis defect:**
+- Blow holes (lubang udara)
+- Pinholes (lubang kecil)
+- Burr (bram/tonjolan)
+- Shrinkage defects (cacat penyusutan)
+- Mould material defects (cacat material cetakan)
+- Pouring metal defects (cacat tuangan logam)
+- Metallurgical defects (cacat metalurgi)
+
+**Masalah di Industri:**
+- ❌ Inspeksi manual sangat memakan waktu
+- ❌ Akurasi manusia tidak 100% konsisten
+- ❌ Human error dapat menyebabkan penolakan seluruh order
+- ❌ Kerugian besar bagi perusahaan
+
+**Solusi:**
+✅ Automatic inspection menggunakan Deep Learning classification model
 
 ---
 
@@ -39,24 +95,31 @@ dataset/
 
 | Property | Value |
 |----------|-------|
+| **Product** | Submersible pump impeller |
+| **View Angle** | Top view |
 | **Original Size** | 512 x 512 pixels |
 | **Resized to** | 224 x 224 pixels (for MobileNetV2) |
 | **Format** | JPEG |
-| **Color Space** | RGB (3 channels) |
+| **Color Space** | Grayscale (converted to RGB for model) |
 | **Bit Depth** | 8-bit per channel |
 | **File Size** | ~30-80 KB per image |
+| **Lighting** | Stable lighting with special arrangement |
+| **Augmentation** | Not applied (original 512x512 dataset)
 
 ---
 
 ## 🔍 Class Definitions
 
-### Class 0: def_front (Cacat Produksi)
+### Class 0: def_front (Defective Casting)
 **Karakteristik:**
-- Produk casting dengan defect/cacat
-- Pola tidak sempurna
-- Ada lubang, retak, atau deformasi
-- Warna tidak merata
-- Permukaan tidak smooth
+- Impeller casting dengan defect/cacat
+- **Blow holes:** Lubang udara di permukaan
+- **Pinholes:** Lubang kecil di casting
+- **Burr:** Tonjolan atau bram yang tidak diinginkan
+- **Shrinkage defects:** Cacat penyusutan material
+- **Deformasi:** Bentuk tidak sempurna/bengkok
+- **Surface defects:** Permukaan tidak smooth/kasar
+- **Mould defects:** Cacat dari cetakan
 
 **Sample Filenames:**
 ```
@@ -66,13 +129,19 @@ cast_def_0_1001.jpeg
 ...
 ```
 
-### Class 1: ok_front (Lulus QC)
+**Total:** 453 images (defective impellers)
+
+---
+
+### Class 1: ok_front (OK/Pass Casting)
 **Karakteristik:**
-- Produk casting sempurna
+- Impeller casting sempurna tanpa cacat
 - Pola konsisten dan simetris
-- Tidak ada lubang atau retak
-- Warna merata
-- Permukaan smooth
+- Tidak ada lubang (blow holes/pinholes)
+- Tidak ada burr atau tonjolan
+- Permukaan smooth dan rata
+- Bentuk sesuai spesifikasi
+- Lulus quality control inspection
 
 **Sample Filenames:**
 ```
@@ -81,6 +150,8 @@ cast_ok_0_1.jpeg
 cast_ok_0_10.jpeg
 ...
 ```
+
+**Total:** 563 images (OK impellers)
 
 ---
 
@@ -135,26 +206,37 @@ train_datagen = ImageDataGenerator(
 ## 📥 Dataset Source
 
 **Original Dataset:**
-- **Name:** Casting Product Image Data for Quality Inspection
-- **Source:** Kaggle / Public Dataset
+- **Name:** Real-life Industrial Dataset of Casting Product
+- **Author:** Ravirajsinh Dabhi
+- **Source:** [Kaggle Dataset](https://www.kaggle.com/datasets/ravirajsinh45/real-life-industrial-dataset-of-casting-product)
+- **Company:** PILOT TECHNOCAST, Shapar, Rajkot, India
 - **License:** CC BY 4.0 (Free to use)
-- **Format:** casting_512x512
+- **Format:** 512x512 grayscale images (without augmentation)
+- **Product:** Submersible pump impeller
+
+**Full Dataset Available:**
+- **Large dataset:** 7,348 images (300x300 pixels, grayscale, with augmentation)
+  - Train: def_front (3,758) + ok_front (2,875) = 6,633 images
+  - Test: def_front (453) + ok_front (262) = 715 images
+- **Current dataset:** 1,016 images (512x512 pixels, grayscale, without augmentation)
+  - def_front: 453 images
+  - ok_front: 563 images
 
 **Lokasi Dataset:**
 ```
 d:\Bapenda New\explore\Data Set\Casting Product Image Data For QA\
 └── casting_512x512\
     └── casting_512x512\
-        ├── def_front\
-        └── ok_front\
+        ├── def_front\  (453 images)
+        └── ok_front\   (563 images)
 ```
 
 **Dataset sudah di-copy ke:**
 ```
 d:\Flutter Interesting Thing\SolDef_AI PCB dataset for defect detection\SolDef_AI\
 └── dataset\
-    ├── def_front\
-    └── ok_front\
+    ├── def_front\  (453 images - defective impellers)
+    └── ok_front\   (563 images - OK impellers)
 ```
 
 ---
@@ -162,17 +244,27 @@ d:\Flutter Interesting Thing\SolDef_AI PCB dataset for defect detection\SolDef_A
 ## 🎯 Dataset Quality
 
 ### ✅ Kualitas Baik:
+- **Real-life industrial data** dari pabrik aktual
 - Image resolution tinggi (512x512)
-- Lighting konsisten
+- **Stable lighting** dengan special arrangement
 - Background uniform (hitam)
-- Objek terpusat
+- Objek terpusat (top-view impeller)
 - Kontras bagus
+- **No pre-augmentation** (original images)
+- Captured with controlled environment
 
 ### ⚠️ Perhatian:
-- Jumlah data relatif kecil (~1000 images)
-- Perlu data augmentation (sudah aktif)
-- Variasi defect terbatas
-- Single angle (frontal view only)
+- Jumlah data relatif kecil (~1,000 images)
+- Perlu data augmentation (sudah aktif di training)
+- Variasi defect types bervariasi
+- Single angle (top view only)
+- Grayscale images (converted to RGB for model)
+
+### 🏭 Industrial Context:
+- Dataset diambil dari **PILOT TECHNOCAST**, perusahaan casting di Rajkot, India
+- Produk: Submersible pump impeller
+- Use case: Menggantikan manual inspection dengan AI-powered automatic inspection
+- Target: Mengurangi rejection rate dan meningkatkan quality control efficiency
 
 ---
 
@@ -319,13 +411,23 @@ Dengan dataset ini (1,016 images):
 ## 📝 Dataset Citation
 
 ```
-@dataset{casting_product_qa,
-  title={Casting Product Image Data for Quality Inspection},
-  year={2024},
+@dataset{casting_product_defect_detection,
+  title={Real-life Industrial Dataset of Casting Product},
+  author={Ravirajsinh Dabhi},
+  year={2020},
   publisher={Kaggle},
-  url={https://www.kaggle.com/datasets/...}
+  organization={PILOT TECHNOCAST, Shapar, Rajkot},
+  url={https://www.kaggle.com/datasets/ravirajsinh45/real-life-industrial-dataset-of-casting-product}
 }
 ```
+
+**Contact:**
+- Email: ravirajsinhdabhi86@gmail.com
+- LinkedIn: [Ravirajsinh Dabhi](https://www.linkedin.com/in/ravirajsinh-dabhi/)
+
+**Working Prototype:**
+The original author has also created a working prototype using this dataset.
+Check the Kaggle page for more details.
 
 ---
 

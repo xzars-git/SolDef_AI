@@ -36,9 +36,13 @@ pip install -r requirements.txt
 Dataset sudah tersedia di folder `dataset/`:
 ```
 dataset/
-├── def_front/    # 453 images (cacat produksi)
-└── ok_front/     # 563 images (lulus QC)
+├── def_front/    # 453 images (defective casting impeller)
+└── ok_front/     # 563 images (OK casting impeller)
 ```
+
+**Dataset:** Real-life Industrial Dataset of Casting Product  
+**Product:** Submersible pump impeller (top view)  
+**Source:** PILOT TECHNOCAST, Rajkot
 
 **Verifikasi:**
 ```powershell
@@ -122,19 +126,20 @@ import numpy as np
 # Load model
 model = tf.keras.models.load_model('qc_inspector_model.h5')
 
-# Load image
-img_path = 'test_image.jpg'
+# Load image (impeller casting top view)
+img_path = 'test_impeller.jpg'
 img = image.load_img(img_path, target_size=(224, 224))
 img_array = image.img_to_array(img) / 255.0
 img_array = np.expand_dims(img_array, axis=0)
 
 # Predict
 prediction = model.predict(img_array)
-result = "CACAT ❌" if prediction[0][0] < 0.5 else "LULUS ✅"
+result = "DEFECTIVE ❌" if prediction[0][0] < 0.5 else "OK ✅"
 confidence = (1 - prediction[0][0]) * 100 if prediction[0][0] < 0.5 else prediction[0][0] * 100
 
-print(f"Hasil: {result}")
+print(f"Impeller Status: {result}")
 print(f"Confidence: {confidence:.2f}%")
+print(f"Prediction Score: {prediction[0][0]:.4f}")
 ```
 
 ---

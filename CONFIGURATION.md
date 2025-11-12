@@ -1,6 +1,6 @@
 # ⚙️ Konfigurasi & Tweaking Training
 
-Panduan lengkap untuk mengatur parameter training dan optimasi model.
+Panduan lengkap untuk mengatur parameter training dan optimasi model untuk deteksi cacat casting (submersible pump impeller).
 
 ---
 

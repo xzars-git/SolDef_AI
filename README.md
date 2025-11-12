@@ -1,6 +1,6 @@
-# 🔍 PCB Defect Detection with AI
+# 🔍 Casting Product Defect Detection with AI
 
-Sistem deteksi cacat produksi PCB menggunakan TensorFlow dan MobileNetV2 untuk quality control otomatis.
+Sistem deteksi cacat produksi casting (submersible pump impeller) menggunakan TensorFlow dan MobileNetV2 untuk quality control otomatis.
 
 ---
 
@@ -62,9 +62,10 @@ jupyter notebook train.ipynb
 
 - **Base Model:** MobileNetV2 (pre-trained ImageNet)
 - **Input Size:** 224x224 RGB
-- **Output:** Binary classification (Cacat vs OK)
+- **Output:** Binary classification (Defective vs OK)
 - **Optimizer:** Adam (lr=0.001)
 - **Loss:** Binary Crossentropy
+- **Use Case:** Casting defect detection (submersible pump impeller inspection)
 
 **Custom Head:**
 ```
@@ -133,18 +134,18 @@ import numpy as np
 # Load model
 model = tf.keras.models.load_model('qc_inspector_model.h5')
 
-# Load & preprocess image
-img_path = 'test_image.jpg'
+# Load image (impeller casting - top view)
+img_path = 'test_impeller.jpg'
 img = image.load_img(img_path, target_size=(224, 224))
 img_array = image.img_to_array(img) / 255.0
 img_array = np.expand_dims(img_array, axis=0)
 
 # Predict
 prediction = model.predict(img_array)
-result = "CACAT ❌" if prediction[0][0] < 0.5 else "LULUS ✅"
+result = "DEFECTIVE ❌" if prediction[0][0] < 0.5 else "OK ✅"
 confidence = (1 - prediction[0][0]) * 100 if prediction[0][0] < 0.5 else prediction[0][0] * 100
 
-print(f"Hasil: {result} (Confidence: {confidence:.2f}%)")
+print(f"Impeller Status: {result} (Confidence: {confidence:.2f}%)")
 ```
 
 ---
@@ -218,14 +219,17 @@ DROPOUT_RATE = 0.5  # Naikan dropout
 
 ## 📊 Dataset Info
 
+- **Product Type:** Submersible pump impeller (casting manufacturing)
 - **Total Images:** 1,016 images
-  - **def_front:** 453 images (cacat produksi)
-  - **ok_front:** 563 images (lulus QC)
+  - **def_front:** 453 images (defective casting)
+  - **ok_front:** 563 images (OK/pass casting)
 - **Image Size:** 512x512 pixels (auto-resized ke 224x224)
-- **Format:** JPEG
+- **Format:** JPEG (grayscale converted to RGB)
+- **View:** Top view of impeller
 - **Split:** 80% training, 20% validation (auto)
 
-**Sumber:** Casting Product Image Data for Quality Inspection
+**Sumber:** Real-life Industrial Dataset of Casting Product (Kaggle)  
+**Credit:** PILOT TECHNOCAST, Shapar, Rajkot
 
 ---
 
@@ -281,9 +285,16 @@ MIT License - Free to use for educational and commercial purposes.
 
 ## 🙏 Acknowledgments
 
-- Dataset: Casting Product Image Data for Quality Inspection
-- Base Model: MobileNetV2 (ImageNet pre-trained)
-- Framework: TensorFlow 2.10.0
+- **Dataset:** Real-life Industrial Dataset of Casting Product
+- **Source:** [Kaggle - Ravirajsinh Dabhi](https://www.kaggle.com/datasets/ravirajsinh45/real-life-industrial-dataset-of-casting-product)
+- **Company:** PILOT TECHNOCAST, Shapar, Rajkot
+- **Base Model:** MobileNetV2 (ImageNet pre-trained)
+- **Framework:** TensorFlow 2.10.0
+
+**About the Dataset:**
+This dataset contains images of casting manufacturing products (submersible pump impeller).
+Casting defects include blow holes, pinholes, burr, shrinkage defects, mould material defects, pouring metal defects, and metallurgical defects.
+The images are top-view of impellers captured with stable lighting arrangement.
 
 ---
 

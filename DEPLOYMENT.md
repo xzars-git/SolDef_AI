@@ -1,6 +1,6 @@
 # 🚀 Deployment Guide
 
-Panduan lengkap untuk deploy model PCB defect detection ke production.
+Panduan lengkap untuk deploy model Casting Product Defect Detection (submersible pump impeller inspection) ke production.
 
 ---
 
@@ -54,7 +54,7 @@ print(f"TFLite model size: {len(tflite_model) / 1024:.2f} KB")
 - ❌ Limited ops support (rare)
 - ❌ Requires TFLite runtime
 
-**Use Case:** Mobile apps (Flutter, React Native), IoT, edge devices
+**Use Case:** Mobile apps (Flutter, React Native), IoT devices, edge devices di factory floor, handheld inspection devices
 
 ---
 
@@ -153,13 +153,14 @@ def predict():
         
         # Interpret result
         is_defect = prediction < 0.5
-        result = "CACAT" if is_defect else "LULUS"
+        result = "DEFECTIVE" if is_defect else "OK"
         confidence = (1 - prediction) * 100 if is_defect else prediction * 100
         
         return jsonify({
             'result': result,
             'confidence': float(confidence),
             'prediction_score': float(prediction),
+            'product': 'submersible_pump_impeller',
             'status': 'success'
         })
     

@@ -1,6 +1,6 @@
 # 🔧 Troubleshooting & FAQ
 
-Panduan solusi untuk masalah umum saat training PCB defect detection model.
+Panduan solusi untuk masalah umum saat training Casting Product Defect Detection model (submersible pump impeller inspection).
 
 ---
 
@@ -317,18 +317,24 @@ LEARNING_RATE = 0.001  # pastikan tidak terlalu kecil
 - Sudah aktif di script (rotation, zoom, flip)
 - Increase augmentation parameters (lihat [CONFIGURATION.md](CONFIGURATION.md))
 
-**Opsi 2: Tambah gambar baru**
-1. Ambil foto PCB lebih banyak
-2. Masukkan ke folder `dataset/lulus_qc/` atau `dataset/cacat_produksi/`
-3. Minimal 100 gambar per class
+**Opsi 2: Download Full Dataset (7,348 images)**
+1. Kunjungi [Kaggle Dataset](https://www.kaggle.com/datasets/ravirajsinh45/real-life-industrial-dataset-of-casting-product)
+2. Download "casting_data.zip" (300x300 with augmentation)
+3. Gunakan folder train (6,633 images total)
 
-**Opsi 3: Download dataset tambahan**
-- Cari di Kaggle atau Roboflow
+**Opsi 3: Tambah gambar impeller baru**
+1. Ambil foto impeller casting (top view)
+2. Pastikan lighting stabil dan konsisten
+3. Masukkan ke folder `dataset/def_front/` atau `dataset/ok_front/`
+4. Minimal 100 gambar per class
+
+**Opsi 4: Download dataset casting tambahan**
+- Cari "casting defect" di Kaggle atau Roboflow
 - Pastikan format gambar sama (JPG/PNG)
 
 ---
 
-### Bagaimana cara test model dengan gambar baru?
+### Bagaimana cara test model dengan gambar impeller baru?
 
 ```python
 import tensorflow as tf
@@ -338,21 +344,24 @@ import numpy as np
 # Load model
 model = tf.keras.models.load_model('qc_inspector_model.h5')
 
-# Load & preprocess gambar
-img_path = 'test_image.jpg'
+# Load & preprocess gambar impeller (top view)
+img_path = 'test_impeller.jpg'
 img = image.load_img(img_path, target_size=(224, 224))
 img_array = image.img_to_array(img) / 255.0
 img_array = np.expand_dims(img_array, axis=0)
 
 # Prediksi
 prediction = model.predict(img_array)
-print(f"Prediction: {prediction[0][0]:.4f}")
+print(f"Prediction Score: {prediction[0][0]:.4f}")
 
 # Interpretasi
 if prediction[0][0] > 0.5:
-    print("Hasil: Lulus QC ✅")
+    print("Hasil: OK Casting ✅ (Pass Quality Control)")
+    print(f"Confidence: {prediction[0][0] * 100:.2f}%")
 else:
-    print("Hasil: Cacat Produksi ❌")
+    print("Hasil: Defective Casting ❌ (Reject)")
+    print(f"Confidence: {(1 - prediction[0][0]) * 100:.2f}%")
+    print("Possible defects: blow holes, pinholes, burr, shrinkage, etc.")
 ```
 
 ---
