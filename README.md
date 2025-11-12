@@ -1,6 +1,12 @@
 # 🔍 Cast Iron Submersible Pump Impeller Quality Control
 
-Sistem deteksi cacat produksi casting (submersible pump impeller) menggunakan TensorFlow dan MobileNetV2 untuk quality control otomatis.
+Casting defect detection system for submersible pump impeller using TensorFlow and MobileNetV2 for automated quality control.
+
+> **⚠️ DISCLAIMER - PROTOTYPE & LEARNING PROJECT**  
+> This is a **prototype/sandbox project** created for **learning machine learning** and deep learning concepts.  
+> This project is part of my personal learning journey in AI/ML development.  
+> **Not intended for production use without further validation and testing.**  
+> Use at your own risk for educational and experimental purposes only.
 
 ---
 
@@ -357,6 +363,8 @@ BATCH_SIZE = 8  # Turunkan batch size
 
 MIT License - Free to use for educational and commercial purposes.
 
+**Note:** This is a prototype/sandbox project for learning purposes. While the code is open source, please validate and test thoroughly before using in any production environment.
+
 ---
 
 ## 🙏 Acknowledgments
@@ -371,6 +379,31 @@ MIT License - Free to use for educational and commercial purposes.
 This dataset contains images of casting manufacturing products (submersible pump impeller).
 Casting defects include blow holes, pinholes, burr, shrinkage defects, mould material defects, pouring metal defects, and metallurgical defects.
 The images are top-view of impellers captured with stable lighting arrangement.
+
+---
+
+## 📖 About This Project
+
+**Project Type:** Prototype & Sandbox Learning Project
+
+This project was created as part of my personal learning journey in:
+- 🤖 Machine Learning & Deep Learning fundamentals
+- 🧠 Transfer Learning with pre-trained models (MobileNetV2)
+- 🖼️ Computer Vision and Image Classification
+- 🏭 Industrial AI applications for Quality Control
+- 🐍 Python development with TensorFlow/Keras
+- 📊 Model training, evaluation, and deployment
+
+**Learning Objectives:**
+- Understanding CNN architectures and transfer learning
+- Implementing data augmentation and preprocessing
+- Training models with GPU acceleration (CUDA)
+- Building GUI applications for ML inference
+- Deploying models for real-world use cases
+
+**Status:** ✅ Successfully trained with 95%+ accuracy  
+**Purpose:** Educational and experimental use only  
+**Next Steps:** Further validation required for production deployment
 
 ---
 
