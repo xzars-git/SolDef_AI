@@ -26,10 +26,25 @@ Model klasifikasi gambar untuk deteksi defect pada PCB (Printed Circuit Board) m
 
 ## ⚡ Quick Start (3 Langkah)
 
+### Opsi 1: Setup Otomatis (Recommended)
+
 ```bash
-# 1. Setup environment
-conda create -n pcb python=3.9 -y
-conda activate pcb
+# Double-click file ini atau run di terminal:
+setup.bat
+```
+
+Script akan otomatis:
+- ✅ Create virtual environment (.venv)
+- ✅ Install TensorFlow 2.10.0
+- ✅ Install semua dependencies
+- ✅ Verify GPU
+
+### Opsi 2: Setup Manual
+
+```bash
+# 1. Setup virtual environment
+python -m venv .venv
+.venv\Scripts\activate
 pip install -r requirements.txt
 
 # 2. Verifikasi GPU (CUDA 11.2 + cuDNN 8.1)
@@ -47,11 +62,13 @@ python train.py
 
 ```
 SolDef_AI/
+├── .venv/                      # Virtual environment (jangan di-commit)
 ├── dataset/                    # Dataset gambar PCB (428 images)
 │   ├── lulus_qc/              # ✅ PCB lolos QC (312 images)
 │   └── cacat_produksi/        # ❌ PCB dengan defect (116 images)
 ├── train.py                    # Training script untuk VS Code/Terminal
 ├── train.bat                   # Batch file untuk Windows command line
+├── setup.bat                   # Setup script (create venv & install deps)
 ├── train.ipynb                 # Jupyter Notebook untuk Local/Colab
 ├── requirements.txt            # Dependencies Python
 ├── README.md                   # Quick start guide (file ini)
@@ -70,15 +87,19 @@ SolDef_AI/
 
 **Setup pertama kali:**
 ```powershell
-# Di Anaconda Prompt atau PowerShell
-conda create -n pcb python=3.9 -y
-conda activate pcb
+# Buat virtual environment
+python -m venv .venv
+
+# Aktivasi (Windows PowerShell)
+.venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
 ```
 
 **Cara training:**
 1. Buka `train.py` di VS Code
-2. Pilih Python Interpreter: `Python 3.9 ('pcb')`
+2. Pilih Python Interpreter: `.venv` (klik kanan bawah VS Code)
 3. Run: `Ctrl + F5` atau klik kanan → "Run Python File"
 4. Monitor progress di terminal
 
@@ -87,6 +108,7 @@ pip install -r requirements.txt
 - ✅ Bisa edit code sambil training
 - ✅ Git integration
 - ✅ IntelliSense & autocomplete
+- ✅ Tidak perlu install Anaconda
 
 **Estimasi waktu (RTX 3080 Ti):**
 - 50 epochs: ~5-7 menit
@@ -99,16 +121,20 @@ pip install -r requirements.txt
 
 **Setup pertama kali:**
 ```powershell
-conda activate pcb
+# Aktivasi virtual environment
+.venv\Scripts\activate
+
+# Install Jupyter
 pip install jupyter ipykernel
-python -m ipykernel install --user --name=pcb --display-name="PCB Training"
+
+# Jalankan Jupyter
 jupyter notebook
 ```
 
 **Cara training:**
 1. Browser akan otomatis terbuka
 2. Navigate ke folder project → klik `train.ipynb`
-3. Pilih kernel: `PCB Training`
+3. Pilih kernel: `Python 3.x.x ('.venv')`
 4. Jalankan cell dengan `Shift + Enter` atau `Cell → Run All`
 5. Monitor training dengan visualisasi real-time
 

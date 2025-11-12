@@ -93,14 +93,14 @@ ModuleNotFoundError: No module named 'tensorflow'
 
 **Solutions:**
 ```bash
-# 1. Pastikan environment aktif
-conda activate pcb
+# 1. Pastikan virtual environment aktif
+.venv\Scripts\activate
 
 # 2. Reinstall dependencies
 pip install -r requirements.txt
 
 # 3. Verifikasi installation
-pip list | grep tensorflow
+pip list | findstr tensorflow
 ```
 
 ---

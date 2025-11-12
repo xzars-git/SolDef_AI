@@ -11,13 +11,21 @@ echo - GPU: RTX 3080 Ti
 echo ======================================================================
 echo.
 
-REM Activate conda environment
-call C:\ProgramData\anaconda3\Scripts\activate.bat pcb
-if %ERRORLEVEL% NEQ 0 (
-    echo ERROR: Failed to activate conda environment 'pcb'
+REM Activate virtual environment
+echo Activating virtual environment...
+if exist ".venv\Scripts\activate.bat" (
+    call .venv\Scripts\activate.bat
+    echo Virtual environment activated!
+) else (
+    echo ERROR: Virtual environment not found!
+    echo Please run: python -m venv .venv
+    echo Then: .venv\Scripts\activate
+    echo Then: pip install -r requirements.txt
     pause
     exit /b 1
 )
+
+echo.
 
 REM Check GPU
 echo Checking GPU...

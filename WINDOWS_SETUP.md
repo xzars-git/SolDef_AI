@@ -13,7 +13,7 @@ Panduan lengkap instalasi environment untuk training PCB defect detection di Win
 | **NVIDIA Driver** | ≥ 452.39 | ✅ | [Download](https://www.nvidia.com/Download/index.aspx) |
 | **CUDA Toolkit** | 11.2 | ✅ | [Download](https://developer.nvidia.com/cuda-11.2.0-download-archive) |
 | **cuDNN** | 8.1 for CUDA 11.x | ✅ | [Download](https://developer.nvidia.com/rdp/cudnn-archive) |
-| **Anaconda/Miniconda** | Latest | ✅ | [Download](https://www.anaconda.com/download) |
+| **Python** | 3.9.x | ✅ | [Download](https://www.python.org/downloads/) |
 | **Visual Studio** | 2019/2022 (Build Tools) | ⚠️ | [Download](https://visualstudio.microsoft.com/downloads/) |
 
 ---
@@ -101,37 +101,44 @@ dir "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\bin\cudnn*.dll"
 
 ---
 
-### 4️⃣ Install Anaconda (jika belum)
+### 4️⃣ Install Python 3.9 (jika belum)
 
 **Download & Install:**
-- Download: https://www.anaconda.com/download
-- Install untuk "Just Me" (tidak perlu admin)
-- Lokasi default: `C:\Users\<YourName>\anaconda3`
+- Download: https://www.python.org/downloads/
+- Pilih Python 3.9.x (recommended: 3.9.13)
+- **PENTING:** Centang "Add Python to PATH" saat install
+- Install untuk "All Users" atau "Just Me"
 
 **Verifikasi:**
 ```powershell
-conda --version
-# Output: conda 23.x.x
+python --version
+# Output: Python 3.9.x
 ```
 
 ---
 
-### 5️⃣ Create Conda Environment & Install Dependencies
+### 5️⃣ Create Virtual Environment & Install Dependencies
 
 ```powershell
-# 1. Buat environment baru
-conda create -n pcb python=3.9 -y
+# 1. Buat virtual environment dengan Python 3.9
+python -m venv .venv
 
-# 2. Aktivasi environment
-conda activate pcb
+# 2. Aktivasi virtual environment (PowerShell)
+.venv\Scripts\activate
 
-# 3. Install TensorFlow 2.10.0 (compatible dengan CUDA 11.2 + cuDNN 8.1)
+# Atau jika pakai Command Prompt (CMD):
+# .venv\Scripts\activate.bat
+
+# 3. Upgrade pip (recommended)
+python -m pip install --upgrade pip
+
+# 4. Install TensorFlow 2.10.0 (compatible dengan CUDA 11.2 + cuDNN 8.1)
 pip install tensorflow==2.10.0
 
-# 4. Install dependencies lainnya
+# 5. Install dependencies lainnya
 pip install -r requirements.txt
 
-# 5. Verifikasi instalasi
+# 6. Verifikasi instalasi
 python -c "import tensorflow as tf; print('TensorFlow:', tf.__version__)"
 python -c "import tensorflow as tf; print('GPU:', tf.config.list_physical_devices('GPU'))"
 ```
@@ -141,6 +148,11 @@ python -c "import tensorflow as tf; print('GPU:', tf.config.list_physical_device
 TensorFlow: 2.10.0
 GPU: [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
 ```
+
+**Catatan:**
+- Virtual environment akan dibuat di folder `.venv` di project directory
+- Setiap kali buka terminal baru, jalankan `.venv\Scripts\activate` dulu
+- Untuk deactivate: ketik `deactivate`
 
 ---
 
@@ -217,18 +229,39 @@ pip install tensorflow==2.10.0
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-### Anaconda Prompt (Recommended)
-- Buka "Anaconda Prompt" dari Start Menu
-- Lebih stabil untuk conda commands
+### Aktivasi Virtual Environment di VS Code
+**Buka VS Code:**
+1. Tekan `Ctrl + Shift + P`
+2. Ketik "Python: Select Interpreter"
+3. Pilih `.venv` (Python 3.9.x)
 
-### VS Code Terminal Settings
+**Terminal Settings (settings.json):**
 ```json
-// settings.json
 {
     "terminal.integrated.defaultProfile.windows": "PowerShell",
-    "python.condaPath": "C:\\Users\\<YourName>\\anaconda3\\Scripts\\conda.exe"
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe"
 }
 ```
+
+### Troubleshooting Virtual Environment
+
+**Problem: `.venv\Scripts\activate` tidak jalan**
+
+**Solution:**
+```powershell
+# Gunakan full path
+& "d:\Flutter Interesting Thing\SolDef_AI PCB dataset for defect detection\SolDef_AI\.venv\Scripts\Activate.ps1"
+
+# Atau ubah execution policy
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+**Problem: Virtual environment tidak terdeteksi di VS Code**
+
+**Solution:**
+1. Reload VS Code (`Ctrl + Shift + P` → "Reload Window")
+2. Atau restart VS Code
+3. Atau manually pilih interpreter (Ctrl + Shift + P → "Python: Select Interpreter")
 
 ---
 

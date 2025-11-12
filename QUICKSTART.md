@@ -7,9 +7,9 @@ Panduan singkat untuk memulai training PCB defect detection model dengan cepat.
 ## ⚡ Quick Start (3 Langkah)
 
 ```bash
-# 1. Setup environment
-conda create -n pcb python=3.9 -y
-conda activate pcb
+# 1. Setup virtual environment
+python -m venv .venv
+.venv\Scripts\activate
 pip install -r requirements.txt
 
 # 2. Verifikasi GPU
@@ -32,7 +32,7 @@ python train.py
 
 ```bash
 # Terminal di VS Code
-conda activate pcb
+.venv\Scripts\activate
 python train.py
 # atau Ctrl+F5
 ```
@@ -45,7 +45,7 @@ python train.py
 **Waktu Training:** 20-25 menit (200 epochs)
 
 ```bash
-conda activate pcb
+.venv\Scripts\activate
 jupyter notebook
 # Buka train.ipynb → Run all
 ```
