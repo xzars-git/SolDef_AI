@@ -33,22 +33,14 @@ class CastingDefectDetectorApp:
         
         title_label = tk.Label(
             header_frame,
-            text="🔍 Casting Defect Detection",
+            text="Submersible Pump Impeller Inspection System",
             font=("Arial", 24, "bold"),
             bg="#2C3E50",
             fg="white"
         )
         title_label.pack(pady=15)
         
-        subtitle_label = tk.Label(
-            header_frame,
-            text="Submersible Pump Impeller Inspection System",
-            font=("Arial", 12),
-            bg="#2C3E50",
-            fg="#BDC3C7"
-        )
-        subtitle_label.place(relx=0.5, rely=0.75, anchor="center")
-        
+       
         # Main container
         main_frame = tk.Frame(self.root, bg="#ECF0F1")
         main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
