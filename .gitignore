@@ -47,19 +47,15 @@ Labeled/
 Dataset/
 
 # Model Files (opsional - uncomment jika ingin commit model)
-*.h5
 *.hdf5
 *.keras
 *.pb
 *.tflite
-best_model.h5
 qc_inspector_model.h5
 
 # Training Output
 checkpoints/
 logs/
-*.json
-training_history.json
 training_plots.png
 model_info.txt
 
