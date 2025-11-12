@@ -1,0 +1,33 @@
+﻿# ============================================================================
+# REQUIREMENTS - PCB Defect Detection Training
+# ============================================================================
+# Untuk Windows dengan CUDA 11.2 + cuDNN 8.1
+# Python 3.9 recommended
+# ============================================================================
+
+# Deep Learning Framework
+# TensorFlow 2.10 kompatibel dengan CUDA 11.2 + cuDNN 8.1
+tensorflow==2.10.0
+
+# Data Processing
+numpy>=1.23.0,<2.0.0
+scipy>=1.9.0
+pillow>=9.5.0
+opencv-python>=4.6.0
+pandas>=2.0.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# TensorBoard
+tensorboard>=2.10.0,<2.11
+
+# Jupyter Notebook (optional)
+jupyter>=1.0.0
+ipykernel>=6.22.0
+ipywidgets>=8.0.0
+
+# Utilities
+tqdm>=4.65.0
+scikit-learn>=1.2.0

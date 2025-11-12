@@ -1,0 +1,89 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+pcb/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Dataset & Large Files (Labeled folder dengan gambar & JSON)
+Labeled/
+Dataset/
+
+# Model Files (opsional - uncomment jika ingin commit model)
+*.h5
+*.hdf5
+*.keras
+*.pb
+*.tflite
+best_model.h5
+qc_inspector_model.h5
+
+# Training Output
+checkpoints/
+logs/
+*.json
+training_history.json
+training_plots.png
+model_info.txt
+
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Backup Files
+*.bak
+*.backup
+*.old
+*.orig
+
+# Temporary Files
+*.tmp
+*.temp
+~$*
+
+# Conda
+.conda/
+
+# Logs
+*.log
+*.out
+*.err
